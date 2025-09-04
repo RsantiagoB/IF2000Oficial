@@ -1,0 +1,223 @@
+package logic;
+import java.util.Scanner;
+
+public class Laboratorio2 {
+	
+	Scanner sc = new Scanner(System.in);
+	
+	public void sumarPares() {
+		int suma = 0;
+		for(int i = 2; i <= 1000; i+=2) {
+			suma+=i;
+		}
+		System.out.println("La suma es:" + suma);
+	}
+	
+	public void convertirTemperatura() {
+		System.out.print("Ingrese la temperatura en cecius: ");
+		double celcius = sc.nextInt();
+		
+		double fahrenheit = (celcius * 9/5) + 32;
+		System.out.println("La temperatura en farenheit es: "+ fahrenheit);
+	}
+	
+	public double calcularPotencia() {
+	    
+	    System.out.print("Ingrese el valor de la base: ");
+	    int base = sc.nextInt();
+	    
+	    System.out.print("Ingrese el valor del exponente: ");
+	    int exponente = sc.nextInt();
+	    
+	    double resultado = 1;
+	    int exponenteAbsoluto = Math.abs(exponente);
+	    
+	    // Calculo de la potencia usando multiplicaciones sucesivas
+	    for (int i = 0; i < exponenteAbsoluto; i++) {
+	        resultado *= base;
+	    }
+	    
+	    // Si el exponente era negativo, calculamos el inverso
+	    if (exponente < 0) {
+	        resultado = 1 / resultado;
+	    }
+	    
+	    System.out.println(base + " elevado a la " + exponente + " = " + resultado);
+	    
+	    return resultado;
+	}
+	
+	public void ejercicio16() {
+		int numero;
+		
+		do {
+		System.out.println("Ingrese un numero del 1 al 12 y se mostrara al que mes corresponde: ");
+		numero = sc.nextInt();
+		}while(numero <1 || numero >12);
+		
+		String mes;
+		switch(numero) {
+		
+		case 1:
+			mes = "Enero";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 2:
+			mes = "Febrero";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 3:
+			mes = "Marzo";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 4:
+			mes = "Abril";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 5:
+			mes = "Mayo";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 6:
+			mes = "Junio";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 7:
+			mes = "Julio";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 8:
+			mes = "Agosto";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 9:
+			mes = "Septiembre";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 10:
+			mes = "Octubre";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 11:
+			mes = "Noviembre";
+			System.out.println("El mes es: " + mes);
+			break;
+		case 12:
+			mes = "Diciembre";
+			System.out.println("El mes es: " + mes);
+			break;
+		default:
+			return;
+		}
+		
+	}
+	
+	public double ejercicio17() {
+	    
+	    System.out.print("Ingrese el valor de x: ");
+	    double x = sc.nextDouble();
+	    
+	    double resultado;
+	    
+	    if (x > 0) {
+	        resultado = x + 5;
+	    } else if (x < 0) {
+	        resultado = Math.pow(x, 2); 
+	    } else {
+	        resultado = 1; 
+	    }
+	    
+	    System.out.println("F(" + x + ") = " + resultado);
+	    
+	    return resultado;
+	}
+	
+	public void calcularAreaTriangulo() {
+	    
+	    System.out.println("Calcular el area de un tiangulo. ");
+	    System.out.println("--------------------------------");
+	    
+	    System.out.print("Ingrese la longitud del lado a: ");
+	    double a = sc.nextDouble();
+	    
+	    System.out.print("Ingrese la longitud del lado b: ");
+	    double b = sc.nextDouble();
+	    
+	    System.out.print("Ingrese la longitud del lado c: ");
+	    double c = sc.nextDouble();
+	    
+	    // Validaciones.
+	    if (a <= 0 || b <= 0 || c <= 0) {
+	        System.out.println("Error: Todos los lados deben ser mayores que cero.");
+	        sc.close();
+	        return;
+	    }
+	    
+	    if (a + b <= c || a + c <= b || b + c <= a) {
+	        System.out.println("Error: Los lados no forman un triangulo valido.");
+	        System.out.println("La suma de dos lados debe ser mayor que el tercero.");
+	        sc.close();
+	        return;
+	    }
+	    
+	    // Calcular el semiperimetro
+	    double p = (a + b + c) / 2;
+	    
+	    // Calcular el area.
+	    double area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+	    
+	    // Mostrar resultados
+	    System.out.println("\nResultado:");
+	    System.out.println("Semiperimetro (p): " + p);
+	    System.out.println("Area del triangulo: " + area);
+	    System.out.printf("Area del triangulo (formateado): %.2f\n", area);
+	    
+	}
+	
+	public void intercambiarValores() {
+		System.out.print("Ingrese el primer valor A: ");
+        int a = sc.nextInt();
+        System.out.print("Ingrese el segundo valor B: ");
+        int b = sc.nextInt();
+        
+        System.out.println("---------------------------------");
+        System.out.println("\nAntes del intercambio:");
+        System.out.println("A = " + a);
+        System.out.println("B = " + b);
+        System.out.println("---------------------------------");
+        
+        int temporal = a;   
+        a = b;          
+        b = temporal;   
+        
+        System.out.print("Valores intercambiados:\n ");    
+        System.out.println("A = " + a);
+        System.out.println("B = " + b);
+    }
+	
+	public void ejercicio20() {
+		System.out.print("Ingrese la cordenada x0 del primer punto: ");
+	    double x0 = sc.nextDouble();
+	    System.out.print("Ingrese la cordenada y0 del primer punto; ");
+	    double y0 = sc.nextDouble();
+		System.out.print("Ingrese la cordenada x1 del primer punto: ");
+	    double x1 = sc.nextDouble();
+	    System.out.print("Ingrese la cordenada y1 del primer punto; ");
+	    double y1 = sc.nextDouble();  
+	    
+	    if (x0 == x1) {
+	        System.out.println("Error: Los puntos tienen la misma coordenada x");
+	        System.out.println("La recta es vertical: x = " + x0);
+	        return;
+	    }
+	    //Pendiente
+	    double m = (y0 - y1) / (x0 - x1);
+	    //intersepto
+	    double b = y0 - m * x0;
+	    
+	    System.out.printf("y = %.2fx + %.2f", m, b);
+	    
+	}
+	
+	
+}

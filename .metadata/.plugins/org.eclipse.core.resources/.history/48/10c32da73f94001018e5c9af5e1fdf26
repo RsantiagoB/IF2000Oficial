@@ -1,0 +1,16 @@
+package main;
+import logic.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//id, nombre, edad, telefono, direccion
+
+		Persona cliente1 = new Persona();
+		cliente = (80130049, "Juan Perez", 30, 12345678, "Calle Falsa 123");
+		
+		
+	}
+
+}

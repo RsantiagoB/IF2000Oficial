@@ -1,0 +1,12 @@
+package logic;
+
+public abstract class Cuenta {
+	
+	private int numero;
+	private String saldo;
+	private String cuentaCliente;
+	private Cliente cliente;
+	
+	public Cuenta()
+	
+}

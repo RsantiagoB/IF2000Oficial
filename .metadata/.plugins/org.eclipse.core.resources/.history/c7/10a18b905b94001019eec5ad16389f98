@@ -1,0 +1,78 @@
+package logic;
+
+public class Cuenta_Corriente extends Cuenta{
+	
+	private String initialDate;
+	private double months;
+	private Double interest;
+	
+	public Cuenta_Corriente(int numero, double saldo, String cuentaCliente, Person persona, String banco, String initialDate,
+			int months, Double interest) {
+		super(numero, saldo, cuentaCliente, persona, banco);
+		this.initialDate = initialDate;
+		this.months = months;
+		this.interest = interest;
+	}
+	
+	
+	public String getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(String initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public double getMonths() {
+		return months;
+	}
+
+	public void setMonths(double months) {
+		this.months = months;
+	}
+
+	public Double getInterest() {
+		return interest;
+	}
+
+	public void setInterest(Double interest) {
+		this.interest = interest;
+	}
+
+	public void deposito(double monto) {
+		super.setSaldo(this.getSaldo()+monto);
+	}
+	
+	public void retiro(double monto) {
+        if(monto <= this.getSaldo()) {  
+            super.setSaldo(this.getSaldo() - monto);    
+        } else {
+            System.out.println("Fondos insuficientes para realizar el retiro");
+        }
+    }
+	
+	
+	
+	public double calculoInteres() {
+		double interesGanado;
+		interesGanado = (getSaldo() * getInterest()) / 1200;
+		
+		return super.getSaldo()+interesGanado;
+	}
+
+
+	@Override
+	public String toString() {
+        String result = "\nTipo de Cuenta: Cuenta Corriente" + super.toString() +
+                "\n------------------------" +
+                "\nFecha Inicial: " + this.getInitialDate() + 
+                "\nMeses: " + this.getMonths() + 
+                "\nInterés: " + this.getInterest() + "%" +
+                "\nInterés ganado: " + (this.calculoInteres() - super.getSaldo()) +
+                "\nSaldo después del interés: " + this.calculoInteres();
+        
+        return result;
+    }
+
+	
+}

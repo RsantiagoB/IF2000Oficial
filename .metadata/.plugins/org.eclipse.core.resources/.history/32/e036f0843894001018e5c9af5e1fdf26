@@ -1,0 +1,62 @@
+package logic;
+
+public class Cuenta_Ahorro extends Cuenta{
+	private String initialDate;
+	private String months;
+	private Double interest;
+	
+	public Cuenta_Ahorro(int numero, double saldo, String cuentaCliente, Persona persona, String initialDate,
+			String months, Double interest) {
+		super(numero, saldo, cuentaCliente, persona);
+		this.initialDate = initialDate;
+		this.months = months;
+		this.interest = interest;
+	}
+	
+	
+	
+	
+	public String getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(String initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public String getMonths() {
+		return months;
+	}
+
+	public void setMonths(String months) {
+		this.months = months;
+	}
+
+	public Double getInterest() {
+		return interest;
+	}
+
+	public void setInterest(Double interest) {
+		this.interest = interest;
+	}
+
+	@Override
+	public void deposito() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void retiro() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	@Override
+	public void calculoInteres() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

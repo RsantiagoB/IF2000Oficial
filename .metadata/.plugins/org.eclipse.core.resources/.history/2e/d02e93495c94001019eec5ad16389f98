@@ -1,0 +1,50 @@
+package logic;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class Bitacora {
+    private static int contadorId = 1;
+    private static ArrayList<String> movimientos = new ArrayList<>();
+    
+    public static void registrarMovimiento(String evento, Account cuenta) {
+        // Obtener fecha actual
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String fecha = formatoFecha.format(fechaActual);
+        
+        // Crear registro del movimiento
+        String registro = "ID: " + contadorId +
+                         " | Evento: " + evento +
+                         " | Fecha: " + fecha +
+                         " | Banco: " + cuenta.getBanco() +
+                         " | Cuenta: " + cuenta.getCuentaCliente() +
+                         " | Cliente: " + cuenta.getCliente().getNombre() +
+                         " | Saldo: " + cuenta.getSaldo();
+        
+        // Agregar a la lista y aumentar contador
+        movimientos.add(registro);
+        contadorId++;
+    }
+    
+    public static void mostrarBitacora() {
+        System.out.println("\n=== BITACORA DE MOVIMIENTOS ===");
+        System.out.println("Total de movimientos: " + movimientos.size());
+        System.out.println("===============================");
+        
+        if (movimientos.isEmpty()) {
+            System.out.println("No hay movimientos registrados.");
+        } else {
+            for (String movimiento : movimientos) {
+                System.out.println(movimiento);
+            }
+        }
+    }
+    
+    public static void limpiarBitacora() {
+        movimientos.clear();
+        contadorId = 1;
+        System.out.println("Bitacora limpiada correctamente.");
+    }
+}

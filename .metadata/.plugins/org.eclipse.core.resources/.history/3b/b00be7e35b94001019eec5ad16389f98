@@ -1,0 +1,106 @@
+package main;
+import logic.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        // Crear clientes
+        Person cliente1 = new Person("801300495", "Juan Perez", 30, "88214402", "Calle 123");
+        Person cliente2 = new Person("102540360", "Maria Lopez", 25, "88765432", "Avenida 456");
+        Person cliente3 = new Person("109876543", "Carlos Rodriguez", 35, "88998877", "Boulevard 789");
+        
+        // Crear cuentas de diferentes bancos
+        SavingsAccount cuentaAhorro1 = new SavingsAccount(12, 1000.0, "CA123", cliente1, "Banco de Costa Rica", "01/01/2024", 12, 5.0);
+        Cuenta_Corriente cuentaCorriente1 = new Cuenta_Corriente(6, 2000.0, "CC456", cliente2, "Banco Nacional", "15/01/2024", 6, 3.0);
+        SavingsAccount cuentaAhorro2 = new SavingsAccount(3, 3000.0, "CA789", cliente3, "BAC San Jose", "01/03/2024", 3, 4.0);
+        
+        System.out.println("=== OPERACIONES BANCARIAS ===");
+        
+        // Mostrar cuentas iniciales
+        System.out.println("\n--- Cuentas iniciales ---");
+        System.out.println(cuentaAhorro1.toString());
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println(cuentaCorriente1.toString());
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println(cuentaAhorro2.toString());
+        
+        // Registrar apertura de cuentas en bitácora
+        Bitacora.registrarMovimiento("APERTURA DE CUENTA", cuentaAhorro1);
+        Bitacora.registrarMovimiento("APERTURA DE CUENTA", cuentaCorriente1);
+        Bitacora.registrarMovimiento("APERTURA DE CUENTA", cuentaAhorro2);
+        
+        // Realizar depósito
+        System.out.println("\n--- Realizando depósito de $5000 a cuenta CA123 ---");
+        cuentaAhorro1.deposito(5000.0);
+        Bitacora.registrarMovimiento("DEPÓSITO", cuentaAhorro1);
+        System.out.println(cuentaAhorro1.toString());
+        
+        // Intentar retiro
+        System.out.println("\n--- Intentando retiro de $2000 de cuenta CA123 ---");
+        cuentaAhorro1.retiro(2000.0);
+        Bitacora.registrarMovimiento("RETIRO", cuentaAhorro1);
+        System.out.println(cuentaAhorro1.toString());
+        
+        // Calcular interés
+        System.out.println("\n--- Cálculo de interés cuenta CA123 ---");
+        System.out.println("Saldo con interés: $" + cuentaAhorro1.calculoInteres());
+        
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("=== TRANSFERENCIAS SINPE MÓVIL ===");
+        System.out.println("=".repeat(60));
+        
+        // TRANSFERENCIA 1: Entre bancos diferentes (éxito)
+        System.out.println("\n--- Transferencia 1: BCR -> Banco Nacional ---");
+        SIMPEMovil sinpe1 = new SIMPEMovil(cuentaAhorro1, cuentaCorriente1, 1500.0);
+        sinpe1.transferir();
+        Bitacora.registrarMovimiento("TRANSFERENCIA SINPE - ENVÍO", cuentaAhorro1);
+        Bitacora.registrarMovimiento("TRANSFERENCIA SINPE - RECEPCIÓN", cuentaCorriente1);
+        
+        // Consultar saldos después de la transferencia
+        System.out.println("\n--- Saldos después de transferencia 1 ---");
+        sinpe1.consultarSaldo();
+        
+        // TRANSFERENCIA 2: Fondos insuficientes (debe fallar)
+        System.out.println("\n\n--- Transferencia 2: Intentando transferir más del saldo disponible ---");
+        SIMPEMovil sinpe2 = new SIMPEMovil(cuentaCorriente1, cuentaAhorro2, 5000.0);
+        sinpe2.transferir();
+        // No registramos en bitácora porque falló
+        
+        // TRANSFERENCIA 3: Transferencia exitosa más pequeña
+        System.out.println("\n\n--- Transferencia 3: Banco Nacional -> BAC San Jose ---");
+        SIMPEMovil sinpe3 = new SIMPEMovil(cuentaCorriente1, cuentaAhorro2, 500.0);
+        sinpe3.transferir();
+        Bitacora.registrarMovimiento("TRANSFERENCIA SINPE - ENVÍO", cuentaCorriente1);
+        Bitacora.registrarMovimiento("TRANSFERENCIA SINPE - RECEPCIÓN", cuentaAhorro2);
+        
+        // Consultar saldos finales
+        System.out.println("\n\n--- Saldos finales de todas las cuentas ---");
+        System.out.println("\nCuenta BCR (CA123):");
+        System.out.println("Saldo: $" + cuentaAhorro1.getSaldo());
+        
+        System.out.println("\nCuenta Banco Nacional (CC456):");
+        System.out.println("Saldo: $" + cuentaCorriente1.getSaldo());
+        
+        System.out.println("\nCuenta BAC San Jose (CA789):");
+        System.out.println("Saldo: $" + cuentaAhorro2.getSaldo());
+        
+        // Demostrar el cálculo de interés final
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("=== CÁLCULOS DE INTERÉS FINALES ===");
+        System.out.println("=".repeat(60));
+        
+        System.out.println("\nCuenta BCR (CA123) - Saldo con interés:");
+        System.out.println("$" + cuentaAhorro1.calculoInteres());
+        
+        System.out.println("\nCuenta Banco Nacional (CC456) - Saldo con interés:");
+        System.out.println("$" + cuentaCorriente1.calculoInteres());
+        
+        System.out.println("\nCuenta BAC San Jose (CA789) - Saldo con interés:");
+        System.out.println("$" + cuentaAhorro2.calculoInteres());
+        
+        // Mostrar bitácora completa al final
+        System.out.println("\n" + "=".repeat(70));
+        Bitacora.mostrarBitacora();
+    }
+}

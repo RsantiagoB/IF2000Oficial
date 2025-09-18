@@ -1,0 +1,78 @@
+package logic;
+
+public class SIMPEMovil {
+	
+	private Account cuentaOrigen;
+	private Account cuentaDestino;
+	private double monto;
+	
+	public SIMPEMovil(Account cuentaOrigen, Account cuentaDestino, double monto) {
+		this.cuentaOrigen = cuentaOrigen;
+		this.cuentaDestino = cuentaDestino;
+		this.monto = monto;
+	}
+	
+	public Account getCuentaOrigen() {
+		return cuentaOrigen;
+	}
+	
+	public void setCuentaOrigen(Account cuentaOrigen) {
+		this.cuentaOrigen = cuentaOrigen;
+	}
+	
+	public Account getCuentaDestino() {
+		return cuentaDestino;
+	}
+	
+	public void setCuentaDestino(Account cuentaDestino) {
+		this.cuentaDestino = cuentaDestino;
+	}
+	
+	public double getMonto() {
+		return monto;
+	}
+	
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+	
+	public void transferir() {
+		if(monto <= cuentaOrigen.getSaldo()) {
+			cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - monto);
+			cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);
+			System.out.println("\n TRANSFERENCIA SINPE MOVIL EXITOSA");
+	        System.out.println("Monto transferido:" + monto);
+	        System.out.println("\n--- Cuenta Origen ---");
+	        System.out.println("Banco: " + cuentaOrigen.getBanco());
+	        System.out.println("Cuenta: " + cuentaOrigen.getCuentaCliente());
+	        System.out.println("Nuevo saldo: " + cuentaOrigen.getSaldo());
+	        
+	        System.out.println("\n--- Cuenta Destino ---");
+	        System.out.println("Banco: " + cuentaDestino.getBanco());
+	        System.out.println("Cuenta: " + cuentaDestino.getCuentaCliente());
+	        System.out.println("Nuevo saldo: " + cuentaDestino.getSaldo());
+		} else {
+			System.out.println("Fondos insuficientes en la cuenta origen para realizar la transferencia");
+		}
+	}
+	
+	public void consultarSaldo() {
+		System.out.println("Saldo cuenta origen: " + cuentaOrigen.getSaldo());
+		System.out.println("Saldo cuenta destino: " + cuentaDestino.getSaldo());
+	}
+	
+	
+	@Override
+    public String toString() {
+        return "\n==== SIMPEMovil ====" +
+               "\nOrigen: " + cuentaOrigen.getCuentaCliente() +
+               "\n" + cuentaOrigen.getBanco() +
+               "\n Destino: " + cuentaDestino.getCuentaCliente() +
+               "\n" + cuentaDestino.getBanco() +
+               "\n Monto: " + monto +
+               "\n===================";
+               
+    }
+	
+	
+}

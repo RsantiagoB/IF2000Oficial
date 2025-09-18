@@ -1,0 +1,18 @@
+package main;
+import logic.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//id, nombre, edad, telefono, direccion
+
+		Persona cliente1 = new Persona("801300495", "Juan Perez", 30, "88214402", "Calle 123");
+		
+		Cuenta_Ahorro cuentaAhorro1 = new Cuenta_Ahorro(12, 1000.0, "CA123", cliente1, "01/01/2024", 12, 5.0);
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,81 @@
+package logic;
+
+public class Cuenta_Ahorro extends Account{
+	private String initialDate;
+	private double months;
+	private Double interest;
+	
+	public Cuenta_Ahorro(int numero, double saldo, String cuentaCliente, Person persona, String banco, String initialDate,
+			int months, Double interest) {
+		super(numero, saldo, cuentaCliente, persona, banco);
+		this.initialDate = initialDate;
+		this.months = months;
+		this.interest = interest;
+	}
+	
+	
+	public String getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(String initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public double getMonths() {
+		return months;
+	}
+
+	public void setMonths(double months) {
+		this.months = months;
+	}
+
+	public Double getInterest() {
+		return interest;
+	}
+
+	public void setInterest(Double interest) {
+		this.interest = interest;
+	}
+
+	public void deposito(double monto) {
+		super.setSaldo(this.getSaldo()+monto);
+	}
+	
+	public void retiro(double monto) {
+		if(monto>this.getSaldo()) {
+			super.setSaldo(this.getSaldo()-monto);	
+		} else {
+			System.out.println("Fondos insuficientes para realizar el retiro");
+		}
+		
+	}
+	
+	
+	
+	public double calculoInteres() {
+		double interesGanado;
+		interesGanado = getMonths() * super.getSaldo() * getInterest() / 100;
+		
+		return super.getSaldo()+interesGanado;
+	}
+
+
+	@Override
+	public String toString() {
+		
+		String result = "\nAccount Type: Savings Account" + super.toString() + 
+				"\n------------------------" +
+				"\nInitial Date: " + this.getInitialDate() + 
+				"\nMonths of saving: " + this.getMonths() + 
+				"\nInterest: " + this.getInterest() + "%" +
+				"\nGained interest: " + (this.calculoInteres() - super.getSaldo())+
+				"\n Balance after interest: " + this.calculoInteres();
+		
+		return result;
+		
+	}
+	
+	
+	
+}

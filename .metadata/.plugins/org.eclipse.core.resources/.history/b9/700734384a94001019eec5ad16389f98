@@ -1,0 +1,118 @@
+package logic;
+
+public abstract class Cuenta {
+	
+	private int numeroDePlazo;
+	private double saldo;
+	private String cuentaCliente;
+	private Persona cliente;
+	private String banco;
+	
+	
+	
+	
+	public Cuenta(int numeroDePlazo, double saldo, String cuentaCliente, Persona cliente) {
+		super();
+		this.numeroDePlazo = numeroDePlazo;
+		this.saldo = saldo;
+		this.cuentaCliente = cuentaCliente;
+		this.cliente = cliente;
+		this.banco = banco;
+	}
+	public int getNumero() {
+		return numeroDePlazo;
+	}
+	public void setNumero(int numero) {
+		this.numeroDePlazo = numero;
+	}
+	public double getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+	public String getCuentaCliente() {
+		return cuentaCliente;
+	}
+	public void setCuentaCliente(String cuentaCliente) {
+		this.cuentaCliente = cuentaCliente;
+	}
+	public Persona getCliente() {
+		return cliente;
+	}
+	public void setPersona(Persona cliente) {
+		this.cliente = cliente;
+	}
+	
+	public String getBanco() {
+		return banco;
+	}
+	
+	public void setBanco(String banco) {
+		this.banco = banco;
+	}
+	
+	/*public void calculoInteres() {
+		int opcion;
+		double interesGanado;
+		double porcentajeInteres;
+		System.out.println("CALCULO DE INTERES");
+		System.out.println("Seleccione el tipo de cuenta:");
+		System.out.println("1. Cuenta de ahorros");
+		System.out.println("2. cuenta corriente");
+		opcion = sc.nextInt();
+		
+		switch(opcion){
+		
+		case 1:
+			System.out.println("Ingrese el numero de meses de plazo: ");
+			 numeroDePlazo = sc.nextInt();
+			System.out.println("Ingrese el saldo actual de la cuenta: ");
+			 saldoActual = sc.nextDouble();
+			 System.out.println("ingrese el porcentaje de interes pactado con el banco: ");
+			  porcentajeInteres = sc.nextDouble();
+			 
+			  interesGanado = (numeroDePlazo * saldoActual * porcentajeInteres) / 100;
+			 
+			 System.out.println("El interes ganado en la cuenta de ahorros es: " + interesGanado);
+			 saldoActual += interesGanado;
+			 break;
+		case 2:
+			
+			 System.out.println("Ingrese el saldo actual de la cuenta: ");
+			 saldoActual = sc.nextDouble();
+			 System.out.println("ingrese el porcentaje de interes pactado con el banco: ");
+			  porcentajeInteres = sc.nextDouble();
+			 
+			  interesGanado = (saldoActual * porcentajeInteres) / 1200;
+			 
+			 System.out.println("El interes ganado en la cuenta de ahorros es: " + interesGanado);
+			 saldoActual += interesGanado;
+			 break;
+		}
+		
+		
+	}*/
+	
+	public abstract void deposito(double monto);
+	public abstract void retiro(double monto);
+	public abstract double calculoInteres();
+	
+	@Override
+	public String toString() {
+		
+		String resultado = "\nINFORMACION DE LA CUENT BANCARIA"
+				+ "\nBanco: " + getBanco()
+				+ "\nNumero de cuenta: " + getCuentaCliente()
+				+ "\nSaldo actual: " + getSaldo()
+				+ "\nNumero de plazo (meses): " + getNumero()
+				+ "\n" + getCliente().toString();
+		
+		
+		return resultado;
+	}
+	
+	
+	
+	
+}
